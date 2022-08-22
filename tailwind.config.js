@@ -9,11 +9,15 @@ module.exports = {
         'blue1': '#005FCE',
         'yellow1': '#FFC31C',
         'red1': '#B80000',
-        'green1': '#10771A'
+        'green1': '#10771A',
+        'base': '#fffbf2'
       },
       borderWidth: {
         'simple': '1px'
       },
+      borderRadius: {
+        'radbase': '10px'
+      }
     },
   },
   plugins: [],

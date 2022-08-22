@@ -15,7 +15,7 @@ body,
 #root {
   width: 100%;
   height: 100%;
-  background-color: #fffbf2;
+  background-color: rgb(255, 251, 242);
   overflow-y: hidden;
 }
 
@@ -28,5 +28,9 @@ body,
 }
 
 .text-transition {
-  transition: all 0.5s ease;
+  transition: all 0.3s ease-in;
+}
+
+.text-transition-all p {
+  transition: all 0.3s ease-in;
 }
