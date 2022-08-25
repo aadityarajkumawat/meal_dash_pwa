@@ -17,6 +17,9 @@ module.exports = {
       },
       borderRadius: {
         'radbase': '10px'
+      },
+      width: {
+        '50px': '50px !important'
       }
     },
   },

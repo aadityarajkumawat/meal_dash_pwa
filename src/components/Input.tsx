@@ -8,10 +8,11 @@ interface InputProps
   > {
   name: string
   right?: ReactNode
+  inputRef?: React.MutableRefObject<HTMLInputElement | null>
 }
 
 export const Input = (props: InputProps) => {
-  const { name, right, ...inputProps } = props
+  const { name, right, inputRef, ...inputProps } = props
 
   return (
     <div className='w-full rounded-radbase'>
@@ -19,7 +20,8 @@ export const Input = (props: InputProps) => {
       <div className='border-yellow1 border-2 rounded-radbase bg-base flex'>
         {!!right && <Fragment>{right}</Fragment>}
         <input
-          className={`pr-3 py-3 text-lg w-full outline-none bg-base rounded-radbase`}
+          ref={inputRef}
+          className={`pr-3 py-3 text-lg w-full outline-none bg-base rouned`}
           {...inputProps}
         />
       </div>

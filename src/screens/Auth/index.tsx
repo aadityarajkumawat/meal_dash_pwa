@@ -1,9 +1,9 @@
-import { useRef } from 'react'
-import { useEffect } from 'react'
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
+import OtpInput from 'react-otp-input'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '../../components/Button'
 import { Input } from '../../components/Input'
+import { Toast } from '../../components/Toast'
 
 type PageState = 'enter-number' | 'enter-otp'
 
@@ -11,34 +11,20 @@ export const Auth = () => {
   const [pageState, setPageState] = useState<PageState>('enter-number')
   const pushTo = useNavigate()
 
-  const inputRef = useRef<HTMLInputElement | null>(null)
-  const inputRef1 = useRef<HTMLInputElement | null>(null)
-  const inputRef2 = useRef<HTMLInputElement | null>(null)
-  const inputRef3 = useRef<HTMLInputElement | null>(null)
-  const inputRef4 = useRef<HTMLInputElement | null>(null)
-  const inputRef5 = useRef<HTMLInputElement | null>(null)
+  const [toast, setToast] = useState<string>('')
+
+  useEffect(() => {
+    if (toast.length > 0) {
+      setTimeout(() => {
+        setToast('')
+      }, 2000)
+    }
+  }, [toast])
 
   const mobileInputRef = useRef<HTMLInputElement | null>(null)
 
-  const refs = [inputRef, inputRef1, inputRef2, inputRef3, inputRef4, inputRef5]
-
-  const otp = useRef<Array<number>>([])
-
-  useEffect(() => {
-    if (!inputRef.current) return
-    inputRef.current.focus()
-  }, [pageState])
-
-  function handleChange(value: string, index: number) {
-    if (value.length > 1) return
-
-    const _otp = [...otp.current]
-    _otp[index] = parseInt(value)
-
-    otp.current = _otp
-
-    refs[index + 1].current?.focus()
-  }
+  const [inputMobile, setInputMobile] = useState<string>('')
+  const [otp, setOTP] = useState({ otp: '' })
 
   return (
     <div className='flex justify-center items-center h-full w-full px-5'>
@@ -49,7 +35,11 @@ export const Auth = () => {
             <div className='w-full flex flex-col items-end'>
               <Fragment>
                 <Input
-                  ref={mobileInputRef}
+                  value={inputMobile}
+                  onChange={(e) => {
+                    setInputMobile(e.target.value)
+                  }}
+                  inputRef={mobileInputRef}
                   name='Enter your phone number'
                   type='number'
                   right={
@@ -63,7 +53,16 @@ export const Auth = () => {
                   size='full'
                   bg='bg-yellow1 mt-5'
                   onClick={() => {
-                    setPageState('enter-otp')
+                    // if (inputMobile.length === 0) {
+                    //   setToast('Please enter mobile number')
+                    //   return
+                    // }
+                    // if (inputMobile.length !== 10) {
+                    //   setToast('Invalid mobile number')
+                    //   return
+                    // }
+                    // setPageState('enter-otp')
+                    window.open('https://maps.google.com/maps')
                   }}
                 >
                   <p className='text-stone-800'>Continue</p>
@@ -74,68 +73,40 @@ export const Auth = () => {
         ) : (
           <div className='w-full flex flex-col items-end'>
             <Fragment>
-              <div className='w-full'>
-                <p>Enter OTP</p>
+              <form className='w-full'>
+                <div className='w-full'>
+                  <p>Enter OTP</p>
 
-                <div className='flex justify-between w-full'>
-                  <input
-                    className='outline-none w-12 h-12 bg-base border-yellow1 border-2 rounded-md p-1 text-center text-lg'
-                    type='number'
-                    value={otp.current[0]}
-                    onChange={(e) => handleChange(e.target.value, 0)}
-                    ref={refs[0]}
-                  />
-                  <input
-                    className='outline-none w-12 h-12 bg-base border-yellow1 border-2 rounded-md p-1 text-center text-lg'
-                    type='number'
-                    onChange={(e) => handleChange(e.target.value, 1)}
-                    value={otp.current[1]}
-                    ref={refs[1]}
-                  />
-                  <input
-                    className='outline-none w-12 h-12 bg-base border-yellow1 border-2 rounded-md p-1 text-center text-lg'
-                    type='number'
-                    onChange={(e) => handleChange(e.target.value, 2)}
-                    value={otp.current[2]}
-                    ref={refs[2]}
-                  />
-                  <input
-                    className='outline-none w-12 h-12 bg-base border-yellow1 border-2 rounded-md p-1 text-center text-lg'
-                    type='number'
-                    onChange={(e) => handleChange(e.target.value, 3)}
-                    value={otp.current[3]}
-                    ref={refs[3]}
-                  />
-                  <input
-                    className='outline-none w-12 h-12 bg-base border-yellow1 border-2 rounded-md p-1 text-center text-lg'
-                    type='number'
-                    onChange={(e) => handleChange(e.target.value, 4)}
-                    value={otp.current[4]}
-                    ref={refs[4]}
-                  />
-                  <input
-                    className='outline-none w-12 h-12 bg-base border-yellow1 border-2 rounded-md p-1 text-center text-lg'
-                    type='number'
-                    onChange={(e) => handleChange(e.target.value, 5)}
-                    value={otp.current[5]}
-                    ref={refs[5]}
+                  <OtpInput
+                    value={otp.otp}
+                    onChange={(otp: string) => {
+                      setOTP((_otp) => ({ ..._otp, otp }))
+                    }}
+                    numInputs={6}
+                    separator={<span></span>}
+                    inputStyle='outline-none w-50px h-12 bg-base border-yellow1 border-2 rounded-md py-1 px-2 text-center text-lg'
+                    focusStyle='border-yellow-600'
+                    containerStyle='w-full justify-between'
+                    shouldAutoFocus={true}
+                    isInputNum={true}
                   />
                 </div>
-              </div>
 
-              <Button
-                size='full'
-                bg='bg-yellow1 mt-5 w-full'
-                onClick={() => {
-                  pushTo('/home')
-                }}
-              >
-                <p className='text-stone-800'>Continue</p>
-              </Button>
+                <Button
+                  size='full'
+                  bg='bg-yellow1 mt-5 w-full'
+                  onClick={() => {
+                    pushTo('/home')
+                  }}
+                >
+                  <p className='text-stone-800'>Continue</p>
+                </Button>
+              </form>
             </Fragment>
           </div>
         )}
       </div>
+      {!!toast && <Toast msg={toast} />}
     </div>
   )
 }

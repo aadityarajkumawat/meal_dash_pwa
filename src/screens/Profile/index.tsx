@@ -16,7 +16,7 @@ export const Profile = () => {
 
         <div className='flex flex-col w-full mt-7 rounded-sm'>
           <Option title='Free Meals' to='/free-meals' />
-          <Option title='Manage Calender' to='/manage-calender' />
+          <Option title='Manage Calender' to='/manage-leaves' />
           <Option title='Menu' to='/menu' />
           <Option title='Feedback' to='/feedback' />
           <Option title='Support' to='/support' />

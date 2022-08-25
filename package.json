@@ -10,8 +10,15 @@
     "@types/node": "^17.0.45",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
+    "@wojtekmaj/react-daterange-picker": "^3.4.0",
+    "framer-motion": "^7.2.1",
+    "moment": "^2.29.4",
+    "moment-range": "^4.0.2",
     "react": "^18.2.0",
+    "react-dater": "^1.6.0",
+    "react-daterange-picker": "2.0.1",
     "react-dom": "^18.2.0",
+    "react-otp-input": "^2.4.0",
     "react-router-dom": "6",
     "react-scripts": "5.0.1",
     "typescript": "^4.7.4",
@@ -27,7 +34,8 @@
     "workbox-range-requests": "^6.5.4",
     "workbox-routing": "^6.5.4",
     "workbox-strategies": "^6.5.4",
-    "workbox-streams": "^6.5.4"
+    "workbox-streams": "^6.5.4",
+    "zustand": "^4.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
