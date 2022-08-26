@@ -53,16 +53,15 @@ export const Auth = () => {
                   size='full'
                   bg='bg-yellow1 mt-5'
                   onClick={() => {
-                    // if (inputMobile.length === 0) {
-                    //   setToast('Please enter mobile number')
-                    //   return
-                    // }
-                    // if (inputMobile.length !== 10) {
-                    //   setToast('Invalid mobile number')
-                    //   return
-                    // }
-                    // setPageState('enter-otp')
-                    window.open('https://maps.google.com/maps')
+                    if (inputMobile.length === 0) {
+                      setToast('Please enter mobile number')
+                      return
+                    }
+                    if (inputMobile.length !== 10) {
+                      setToast('Invalid mobile number')
+                      return
+                    }
+                    setPageState('enter-otp')
                   }}
                 >
                   <p className='text-stone-800'>Continue</p>
