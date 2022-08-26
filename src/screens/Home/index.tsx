@@ -31,10 +31,12 @@ export const MealCard = ({
   collapsed,
   mealCardRef,
   topRef,
+  mealName,
 }: {
   collapsed?: boolean
   mealCardRef?: React.MutableRefObject<HTMLDivElement | null>
   topRef?: React.MutableRefObject<number>
+  mealName?: string
 }) => {
   if (collapsed === undefined) {
     collapsed = true
@@ -57,7 +59,7 @@ export const MealCard = ({
     >
       <div className='text-transition-all '>
         <p className={`${collapsed ? 'text-2xl' : 'text-4xl'} font-bold`}>
-          Breakfast
+          {mealName || 'Breakfast'}
         </p>
         <p
           className={`${collapsedStyles(
@@ -142,13 +144,13 @@ export const Home: React.FC = () => {
         topRef={topRef}
         collapsed={localState.firstCardCollapsed}
       />
-      <MealCard />
-      <MealCard />
-      <MealCard />
-      <MealCard />
-      <MealCard />
-      <MealCard />
-      <MealCard />
+      <MealCard mealName='Lunch' />
+      <MealCard mealName='Snacks' />
+      <MealCard mealName='Dinner' />
+      <MealCard mealName='Breakfast' />
+      <MealCard mealName='Lunch' />
+      <MealCard mealName='Snacks' />
+      <MealCard mealName='Dinner' />
     </div>
   )
 }
